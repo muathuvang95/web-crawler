@@ -1,0 +1,29 @@
+#webcrl-page {
+	background: #fff;
+	padding: 15px;
+	border: rgba(0, 0, 0, .3) 1px solid;
+}
+.webcrl-divi {
+	margin: 15px 0;
+	height: 1px;
+	background: rgba(0, 0, 0, .3);
+}
+.webcrl-button {
+	display: inline-block;
+	white-space: nowrap;
+	height: 32px;
+	line-height: 32px;
+	color: #0071a1;
+	border: #0071a1 1px solid;
+	border-radius: 6px;
+	background: #f3f5f6;
+	padding: 0 15px;
+	margin: 15px 0;
+	cursor: pointer;
+}
+.webcrl-msg {
+	color: #00f;
+}
+#webcrl-step1 {
+	
+}
