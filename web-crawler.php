@@ -49,12 +49,6 @@ class Web_Crawler {
 	public function crawler_page($template) {
 		
 		if( get_query_var( 'webcrawler', false ) !== false ) {
-			/*
-			 Xóa dữ liệu quét cũ trước khi quét mới
-			 */
-			update_option('webcrl_urls', array());
-			update_option('webcrl_crawled', array());
-
 			$new_template = locate_template( array( 'web-crawler-page.php' ) );
 			if( '' != $new_template ) {
 				$template = $new_template;
@@ -194,9 +188,35 @@ class Web_Crawler {
 		die;
 	}
 
+	public function webcrl_urls() {
+		$urls = get_option('webcrl_urls', array());
+		if(!empty($urls)) {
+			foreach ($urls as $key => $value) {
+				echo '<li>'.esc_url($value).'</li>';
+			}
+		}
+		die;
+	}
+
+	public function webcrl_remove_urls() {
+		/*
+		 Xóa dữ liệu quét cũ trước khi quét mới
+		 */
+		update_option('webcrl_urls', array());
+		update_option('webcrl_crawled', array());
+		die;
+	}
+
 	public function hooks() {
+		
 		add_action('wp_ajax_webcrl_scan', array($this, 'webcrl_scan'));
 		add_action('wp_ajax_nopriv_webcrl_scan', array($this, 'webcrl_scan'));
+
+		add_action('wp_ajax_webcrl_urls', array($this, 'webcrl_urls'));
+		add_action('wp_ajax_nopriv_webcrl_urls', array($this, 'webcrl_urls'));
+
+		add_action('wp_ajax_webcrl_remove_urls', array($this, 'webcrl_remove_urls'));
+		add_action('wp_ajax_nopriv_webcrl_remove_urls', array($this, 'webcrl_remove_urls'));
 
 		add_action( 'wp_enqueue_scripts', array($this, 'enqueue_scripts') );
 
